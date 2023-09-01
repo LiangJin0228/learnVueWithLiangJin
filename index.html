@@ -3,7 +3,64 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/index.css" />
+        <script src="lib/vue3.js"></script>
         <title>Vue Practice</title>
     </head>
-    <body></body>
+    <body>
+        <div id="app">
+            <h1>
+                <!-- 通過大括號,直接使用vue裏面的data() -->
+                <!-- 在index.js裏面,data會返回一個數組,裏面的内容是key:value -->
+                <!-- 我們只要簡單將key放在大括號裏面,就會顯示出value -->
+                Hi, my name is {{ name }}, I'm a {{ occupation }} and my age is
+                {{ age }} years old.
+            </h1>
+            <br />
+            <!-- 下面這個是正式寫法，但是因爲v-bind太常使用，因此我們可以像下面第二行只放一個":" -->
+            <!-- 推薦是使用簡寫形式 -->
+            <!-- <a v-bind:href="link">Google首頁</a> -->
+            <a :href="link">Google首頁</a>
+            <br />
+            <ul>
+                <!-- 這樣是一個標准的無序列表 -->
+                <!-- <li v-for="todo in todos">{{ todo }}</li> -->
+                <!-- 這樣就會在它的前面加上index -->
+                <li v-for="(todo,index) in todos">{{ index+1 }}.{{ todo }}</li>
+            </ul>
+            <br />
+            <ul>
+                <!-- 下面示範怎麽用v-for loop來遍歷數組對象 -->
+                <!-- object是在這個loop裏面定義的, in後面的objectV_for對應的是data裏面的key -->
+                <!-- 下面用object.XXX的方式使用它的屬性 -->
+                <li v-for="object in objectV_for">
+                    <!-- 注意這個checkbox,他的屬性checked使用的是v-bind指令 -->
+                    <input type="checkbox" :checked="object.bool" />{{ object.id
+                    }} &emsp; {{ object.name }} &emsp; {{ object.class }}
+                </li>
+            </ul>
+            <br />
+            <!-- 接下來要展現的是 v-if / v-else-if / v-else功能,就和一般程式語言或JS一樣的寫法 -->
+            <!-- 返回True:{true, 1, 非空字符串} -->
+            <!-- 返回False:{false, 0, undefined, null, ""} -->
+            <!-- 要注意的是,v-if, v-else-if, v-else必須是緊挨著才能奏效 -->
+            <p v-if="books.length === 0">一本書都沒有……</p>
+            <h1 v-else-if="books.length === 1">{{ books[0].title }}</h1>
+            <ul v-else>
+                <li v-for="book in books">{{ book.title }}</li>
+            </ul>
+            <br />
+            <!-- 與v-if 類似的還有v-show 指令 -->
+            <!-- 如果v-if 的條件不滿足，那麽就不會顯示/執行後面的内容 -->
+            <!-- 但是使用v-show 的話,即使條件不滿足，也會將HTML標簽渲染出來，只是會加上css的display:none 屬性 -->
+            <!-- 那爲什麽需要有v-if 了還要有這個判斷指令呢？ -->
+            <!-- 因爲有些時候我們需要做一些css的過渡動畫，比如説讓這個div慢慢淡入出現，就需要將這個HTML標簽事先渲染出來，才能夠有過渡的動畫效果 -->
+            <!-- 還有要注意的是,v-show 不能搭配v-else做使用,就只有一次判斷而已,所以要有多個判斷就用多個v-show -->
+            <p v-show="books.length === 0">一本書都沒有……</p>
+            <ul v-show>
+                <li v-for="book in books">{{ book.title }}</li>
+            </ul>
+        </div>
+        <script src="lib/index.js"></script>
+    </body>
 </html>
