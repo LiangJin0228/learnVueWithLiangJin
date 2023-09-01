@@ -1,4 +1,4 @@
-###在開始學習 Vue 之前,應該先把我們的環境設置和 vue 安裝好
+### 在開始學習 Vue 之前,應該先把我們的環境設置和 vue 安裝好
 
 **使用前安裝工具:**
 1.vscode 2.ESLint 3.Volar 4.Prettier 5.Live Server
