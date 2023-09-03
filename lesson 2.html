@@ -8,7 +8,28 @@
         <title>Vue Practice</title>
     </head>
     <body>
-        <div id="app"></div>
+        <div id="app">
+            <div>
+                <!-- 從下面可以看出,我將click事件放到一個h1標簽上 -->
+                <!-- 所以并不是只有button, input之類的可以監聽事件 -->
+                <!-- @click事件中，那一行的意思是: 當你按click之後,本來的click就是false(在Vue的data()裏面)右邊的"!click"會在每次點擊的時候將click的值反轉 -->
+                <!-- div的部分則依據click的值來選擇是否顯示 -->
+                <div v-show="click">你剛剛點了下面的h1</div>
+                <!-- 這邊使用的是運算符，而下方第二行用的是計算屬性(computed()方法) -->
+                <!-- <h1 @click="click = !click">{{ click ? "隱藏" : "展開" }}</h1> -->
+                <h1 @click="click = !click">{{ isClicked }}</h1>
+                <br />
+                <!-- 我們可以使用另外一種方法，那就是將v-on 事件的處理包裝成一個methods -->
+                <div>
+                    <div v-show="click">這個是使用method事件的div</div>
+                    <button @click="clickEvent">{{ isClicked }}</button>
+                </div>
+            </div>
+            <!-- 重點整理 -->
+            <!-- 計算屬性:緩存結果 如果多次使用,data屬性沒有變化,會直接從緩存拿出來用,性能方面好一些(換句話説，只有在data()裏面的值變化時才計算) -->
+            <!-- 方法:不會緩存結果  每一次執行都會重新計算,并且計算屬性只有newValue和oldValue,但是方法可以傳遞參數 -->
+            <!-- 可以在computed 裏面使用this.methodName()來使用定義好的方法 -->
+        </div>
         <script src="lib/lesson 2.js"></script>
     </body>
 </html>
